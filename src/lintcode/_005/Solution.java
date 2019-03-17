@@ -27,7 +27,7 @@ public class Solution {
         int right=end;
         int pivot=nums[start];
         while(left<right){
-            while(left<right&&nums[right]>=pivot)
+            while(left<right && nums[right]>=pivot)
                 right--;
             if(left<right){
                 nums[left]=nums[right];

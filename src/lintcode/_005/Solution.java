@@ -23,26 +23,18 @@ public class Solution {
     }
 
     public int partition(int[] nums,int start,int end){
-        int left=start;
-        int right=end;
-        int pivot=nums[start];
-        while(left<right){
-            while(left<right && nums[right]>=pivot)
-                right--;
-            if(left<right){
-                nums[left]=nums[right];
-                left++;
+        int flag = nums[start];
+        while (start < end){
+            while (nums[end] > flag && end > start){
+                end --;
             }
-            while(left<right&&nums[left]<pivot)
-                left++;
-            if(left<right){
-                nums[right]=nums[left];
-                right--;
-            }
-        }
-        nums[left]=pivot;
-        return left;
 
+            while (nums[start] < flag && end > start){
+                start++;
+            }
+
+        }
+        return end;
     }
 
     public static void main(String[] args) {

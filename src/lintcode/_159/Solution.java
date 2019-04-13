@@ -4,26 +4,21 @@ public class Solution {
 
     public int findMin(int[] nums) {
         // write your code here
-        int length = nums.length;
-        if (length == 0) {
+        if (nums.length == 0){
             return -1;
         }
+
         int left = 0;
-        int right = length-1;
-
+        int right = nums.length;
         while (left < right){
-            int middle = (left + right) >> 1;
-            if (nums[middle] > nums[right] ){
-                left = middle + 1;
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > nums[right-1]){
+                left = mid + 1;
+            }else{
+                right = mid;
             }
-            else{
-                right = middle;
-            }
-
-
         }
-
-        return nums[left];
+        return Math.min(nums[left], nums[right]);
 
     }
 

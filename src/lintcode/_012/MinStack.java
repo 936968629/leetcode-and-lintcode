@@ -4,42 +4,55 @@ import java.util.Stack;
 
 public class MinStack {
 
-    Stack<Integer> stackNum = new Stack<>();
-    Stack<Integer> stackMin = new Stack<>();
+    public Stack<Integer> stack = new Stack<>();
+    public Stack<Integer> stackMin = new Stack<>();
 
-    MinStack(){
-
+    public MinStack() {
+        // do intialization if necessary
     }
 
-    public void push(int x)
-    {
-        this.stackNum.push(x);
-        if (this.stackMin.empty()){
-            this.stackMin.push(x);
-        }else {
-            int min = this.stackMin.peek();
-            if (min > x) {
-                this.stackMin.push(x);
-            } else {
-                this.stackMin.push(min);
+    /*
+     * @param number: An integer
+     * @return: nothing
+     */
+    public void push(int number) {
+        // write your code here
+        stack.push(number);
+        if(stackMin.size() == 0){
+            stackMin.push(number);
+        }else{
+            Integer popItem = stackMin.peek();
+            if(number <= popItem){
+                stackMin.push(number);
             }
         }
 
     }
 
-    public int pop(){
-        if (this.stackNum.empty()) {
+    /*
+     * @return: An integer
+     */
+    public int pop() {
+        // write your code here
+        if(stack.size() == 0){
             return -1;
         }
-        this.stackMin.pop();
-        return this.stackNum.pop();
+        Integer item = stack.pop();
+        Integer minItem = stackMin.peek();
+        if(item.equals(minItem)){
+            stackMin.pop();
+        }
+        return item;
     }
 
-    public int min(){
-        if (this.stackMin.empty()) {
+    /*
+     * @return: An integer
+     */
+    public int min() {
+        // write your code here
+        if(stackMin.size() == 0){
             return -1;
         }
-        return this.stackMin.peek();
+        return stackMin.peek();
     }
-
 }

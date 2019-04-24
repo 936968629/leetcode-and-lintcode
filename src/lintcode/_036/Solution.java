@@ -1,5 +1,7 @@
 package lintcode._036;
 
+import lintcode.ListNode;
+
 public class Solution {
 
 

@@ -9,11 +9,12 @@ public class Solution {
     public int maxPathSum(TreeNode root) {
         // write your code here
         if (root == null){
-            return 0;
+            return -1;
         }
-
+        
         dfs(root);
         return max;
+
     }
 
     public int dfs(TreeNode root){

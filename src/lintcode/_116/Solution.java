@@ -3,7 +3,8 @@ package lintcode._116;
 public class Solution {
 
     public boolean canJump(int[] A) {
-        // write your code here
+        // write your code her
+
         int length = A.length;
         if (length == 0){
             return false;

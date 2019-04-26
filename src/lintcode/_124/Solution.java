@@ -1,7 +1,7 @@
 package lintcode._124;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Solution {
 
@@ -11,6 +11,7 @@ public class Solution {
         if (length == 0){
             return 0;
         }
+
         Set<Integer> set = new HashSet<>();
         for (int i = 0; i < length; i++) {
             set.add(num[i]);
@@ -37,12 +38,14 @@ public class Solution {
         }
         System.out.println(count);
         return count;
+
+
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] num = {0,0,-1};
+
+        int[] num = {1,2,2,2,2,3,5,1,1,5};
         sol.longestConsecutive(num);
     }
-
 }

@@ -2,6 +2,10 @@ package leetcode._092;
 
 import lintcode.ListNode;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Solution {
 
     public ListNode reverseBetween(ListNode head, int m, int n) {

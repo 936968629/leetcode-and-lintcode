@@ -32,7 +32,7 @@ public class Solution {
     public RandomListNode copyRandomNode(RandomListNode head){
         RandomListNode cur = head;
         while (cur != null) {
-            cur.next.random = cur.random;
+            cur.next.random = cur.random.next;
             cur = cur.next.next;
         }
         return head;

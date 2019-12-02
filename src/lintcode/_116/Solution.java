@@ -6,22 +6,21 @@ public class Solution {
         // write your code her
 
         int length = A.length;
-        if (length == 0){
-            return false;
+        if ( length == 0 ) {
+            return true;
         }
-        if (A[0] == 0){
-            return false;
-        }
-        int reach = 0;
-        for (int i = 0; i <= reach ; i++) {
-            if (reach < A[i] + i){
-                reach = i + A[i];
+        //dp[i]表示能否跳到i这个点
+        boolean[] dp = new boolean[length];
+        dp[0] = true;
+        for (int i = 1; i < length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && j + A[j] >= i) {
+                    dp[i] = true;
+                    break;
+                }
             }
-            if (reach >= length-1){
-                return true;
-            }
         }
-        return false;
+        return dp[length-1];
     }
 
 }

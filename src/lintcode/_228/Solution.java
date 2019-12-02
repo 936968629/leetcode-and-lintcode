@@ -14,8 +14,8 @@ public class Solution {
             return cur;
         }
         ListNode slow = cur;
-        ListNode fast = cur;
-        while (fast.next != null && fast.next.next != null){
+        ListNode fast = cur.next;
+        while (fast != null && fast.next != null){
             slow = slow.next;
             fast = fast.next.next;
         }

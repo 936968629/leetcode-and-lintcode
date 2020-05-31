@@ -1,12 +1,5 @@
 package lintcode._457;
 
-import lintcode._156.Interval;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 public class Solution {
 
     public int findPosition(int[] nums, int target) {

@@ -37,4 +37,8 @@ public class Solution {
         System.out.println(min);
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+    }
 }

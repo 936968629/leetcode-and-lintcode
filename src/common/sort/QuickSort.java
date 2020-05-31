@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class QuickSort {
 
     public static void main(String[] args) {
-        int[] arr = {1,4,9,10,33,2,34,56,11,99,0};
+        int[] arr = {1,4,9,10,33,2,34,56,11,99,0,4};
 
 //        int[] arr = {4,6};
 
@@ -16,13 +16,11 @@ public class QuickSort {
 
 
     public static void sort(int[] arr, int left, int right){
-        if ( left >= right) {
-            return;
+        if ( left < right) {
+            int mid = partition(arr, left, right);
+            sort(arr, left, mid-1);
+            sort(arr, mid+1, right);
         }
-
-        int mid = partition(arr, left, right);
-        sort(arr, left, mid-1);
-        sort(arr, mid+1, right);
     }
 
     public static int partition(int[] arr, int left, int right) {

@@ -9,32 +9,50 @@ public class Solution {
         if (head == null){
             return null;
         }
-
         ListNode reverse = reverse(head);
-        ListNode newCur = reverse;
+//        ListNode newCur = reverse;
+//        int sum = 0;
+//        int entry = 1;
+//        while (reverse != null){
+//            sum = reverse.val + entry;
+//            if (sum >= 10){
+//                entry = 1;
+//                sum -= 10;
+//                reverse.val = 0;
+//            }else{
+//                entry = 0;
+//            }
+//            reverse.val = sum;
+//            reverse = reverse.next;
+//        }
+//        if (entry == 1){
+//            ListNode newNode1 = new ListNode(1);
+//            head.next = newNode1;
+//        }
+//        ListNode node = reverse(newCur);
+//        return node;
+        ListNode cur = reverse;
+        int jinwei = 1;
         int sum = 0;
-        int entry = 1;
-        while (reverse != null){
-            sum = reverse.val + entry;
-            if (sum == 10){
-                entry = 1;
+        ListNode prev = null;
+        while ( cur != null ) {
+            sum = cur.val + jinwei;
+            if ( sum >= 10 ) {
                 sum -= 10;
-                reverse.val = 0;
+                jinwei = 1;
             }else{
-                entry = 0;
+                jinwei = 0;
             }
-            reverse.val = sum;
-            reverse = reverse.next;
+            cur.val = sum;
+            prev = cur;
+            cur = cur.next;
         }
-
-        if (entry == 1){
-            ListNode newNode1 = new ListNode(1);
-            head.next = newNode1;
+        if ( jinwei == 1 ) {
+            ListNode newNode = new ListNode(1);
+            prev.next = newNode;
         }
-
-        ListNode node = reverse(newCur);
-
-        return node;
+        ListNode reverse1 = reverse(reverse);
+        return reverse1;
     }
 
     public ListNode reverse(ListNode head){

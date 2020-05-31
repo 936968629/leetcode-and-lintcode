@@ -1,9 +1,10 @@
 package common;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class exceDemo {
+public class exceDemo  {
 
     public static void main(String[] args) {
         List<String> list = new ArrayList<>();

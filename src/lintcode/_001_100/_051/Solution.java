@@ -17,7 +17,7 @@ public class Solution {
         }
         int i = length - 1;
         while ( i > 0 ) {
-            if ( nums.get(i) > nums.get(i-1) ) {
+            if ( nums.get(i) < nums.get(i-1) ) {
                 break;
             }
             i--;
@@ -29,7 +29,7 @@ public class Solution {
         }
         // i> 0
         int j = length - 1;
-        while ( nums.get(i-1) >= nums.get(j) ) {
+        while ( nums.get(i-1) <= nums.get(j) ) {
             j--;
         }
         swap(nums, i-1, j);

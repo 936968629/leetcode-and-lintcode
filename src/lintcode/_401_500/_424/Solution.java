@@ -1,4 +1,4 @@
-package lintcode._424;
+package lintcode._401_500._424;
 
 import java.util.Stack;
 

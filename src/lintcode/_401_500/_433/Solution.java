@@ -1,4 +1,4 @@
-package lintcode._433;
+package lintcode._401_500._433;
 
 public class Solution {
 

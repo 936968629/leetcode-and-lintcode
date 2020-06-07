@@ -1,4 +1,4 @@
-package lintcode._411;
+package lintcode._401_500._411;
 
 import java.util.ArrayList;
 import java.util.List;

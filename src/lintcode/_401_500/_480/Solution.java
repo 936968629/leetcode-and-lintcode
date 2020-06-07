@@ -1,4 +1,4 @@
-package lintcode._480;
+package lintcode._401_500._480;
 
 import lintcode.TreeNode;
 

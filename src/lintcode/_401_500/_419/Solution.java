@@ -1,4 +1,4 @@
-package lintcode._419;
+package lintcode._401_500._419;
 
 import java.util.HashMap;
 import java.util.Map;

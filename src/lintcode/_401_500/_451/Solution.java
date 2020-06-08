@@ -11,9 +11,19 @@ public class Solution {
         }
         ListNode dummyNode = new ListNode(-1);
         dummyNode.next = head;
-        ListNode cur = head;
+        ListNode cur = dummyNode;
 
-        return null;
+        while ( cur.next != null && cur.next.next != null ) {
+            ListNode nextNode = cur.next;
+            ListNode next2Node = cur.next.next;
+            ListNode next3Node = cur.next.next.next;
+            cur.next = next2Node;
+            next2Node.next = nextNode;
+            nextNode.next = next3Node;
+            cur = cur.next.next;
+        }
+
+        return dummyNode.next;
     }
 
 }

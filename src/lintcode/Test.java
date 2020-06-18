@@ -1,5 +1,7 @@
 package lintcode;
 
+import lintcode._001_100._030.Interval;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -8,51 +10,68 @@ import java.util.concurrent.locks.Lock;
 
 public class Test {
 
-    public int[] twoSum(int[] numbers, int target) {
+    public List<Interval> merge(List<Interval> intervals) {
         // write your code here
-        int[] res = new int[2];
-        if ( numbers.length == 0 ) {
-            return res;
+        List<Interval> result = new ArrayList<>();
+        if ( intervals == null || intervals.size() == 0 ) {
+            return result;
         }
+        Collections.sort(intervals, new Comparator<Interval>() {
+            @Override
+            public int compare(Interval o1, Interval o2) {
+                return o1.start-o2.start;
+            }
+        });
 
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < numbers.length; i++) {
-            if ( map.containsKey(numbers[i]) ) {
-                res[0] = map.get(numbers[i]);
-                res[1] = i;
-                return res;
+        for (int i = 0; i < intervals.size(); i++) {
+            if ( result.size() == 0 ) {
+                result.add(intervals.get(i));
             } else {
-                map.put(target-numbers[i], i);
+                Interval interval = intervals.get(i);
+                Interval prev = result.get(result.size() - 1);
+                if ( interval.start <= prev.end  ) {
+                    //合并
+                    prev.end = Math.max(interval.end, prev.end);
+                    result.set(result.size()-1, prev);
+                } else {
+                    result.add(interval);
+                }
             }
         }
-        return res;
-    }
-    //三数之和
-    public List<List<Integer>> threeSum(int[] numbers) {
-        // write your code here
-        List<List<Integer>> res = new ArrayList<>();
-        Arrays.sort(numbers);
-        dfs(numbers, 0, new ArrayList<>(), res);
-        return res;
+        return result;
     }
 
-    public void dfs(int[] numbers, int index, List<Integer> item, List<List<Integer>> res) {
-        if ( item.size() == 3 && item.get(0) + item.get(1) + item.get(2) == 0 ) {
-            res.add(new ArrayList<>(item));
-            return;
+    public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
+        // write your code here
+        List<Interval> result = new ArrayList<>();
+        if ( intervals == null || intervals.size() == 0 ) {
+            result.add(newInterval);
+            return result;
         }
-        if ( item.size() == 3 ) {
-            return;
-        }
-        for (int i = index; i < numbers.length; i++) {
-            if ( i > index && numbers[i] == numbers[i-1] ) {
-                continue;
+        Collections.sort(intervals, new Comparator<Interval>() {
+            @Override
+            public int compare(Interval o1, Interval o2) {
+                return o1.start - o2.start;
             }
-            item.add(numbers[i]);
-            dfs(numbers, i+1, item, res);
-            item.remove(item.size()-1);
+        });
+        int j = 0;
+        for (int i = 0; i < intervals.size(); i++) {
+            Interval interval = intervals.get(i);
+            if ( interval.end < newInterval.start ) {
+                result.add(interval);
+                j++;
+            } else if (interval.start > newInterval.end) {
+                result.add(interval);
+            } else {
+                newInterval.start = Math.min(newInterval.start, interval.start);
+                newInterval.end = Math.max(newInterval.end, interval.end);
+            }
         }
+        result.add(j, newInterval);
+        return result;
     }
+
+
 
     public String minNumber(int[] nums) {
         // write your code here
@@ -89,6 +108,36 @@ public class Test {
             return "0";
         }
         return sb.substring(i);
+    }
+
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        // write your code here
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);
+        boolean[] visited = new boolean[nums.length];
+        Arrays.fill(visited, false);
+        dfs(result, nums, new ArrayList<>(), visited);
+        return result;
+    }
+
+    public void dfs(List<List<Integer>> result, int[] nums, List<Integer> item, boolean[] visited) {
+        if ( item.size() == nums.length ) {
+            result.add(new ArrayList<>(item));
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if ( visited[i] ) {
+                continue;
+            }
+            if ( i > 0 && nums[i] == nums[i-1] && visited[i-1]) {
+                continue;
+            }
+            item.add(nums[i]);
+            visited[i] = true;
+            dfs(result, nums, item, visited);
+            item.remove(item.size() - 1);
+            visited[i] = false;
+        }
     }
 
     public static void main(String[] args) {

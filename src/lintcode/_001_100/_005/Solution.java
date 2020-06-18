@@ -14,12 +14,7 @@ public class Solution {
             return 0;
         }
         //升序
-        Queue<Integer> queue = new PriorityQueue<>(n, new Comparator<Integer>() {
-            @Override
-            public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
-            }
-        });
+        Queue<Integer> queue = new PriorityQueue<>(n);
         for (int i = 0; i < length; i++) {
             if (i < n){
                 queue.offer(nums[i]);

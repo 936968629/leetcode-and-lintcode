@@ -25,17 +25,7 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        Class name = null;
-        try {
-            name = Class.forName("com.leetcode._001.Solution");
-            name.newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
+
 
         Solution sol = new Solution();
         int[] nums = {4,5,6,7,0,1,2};

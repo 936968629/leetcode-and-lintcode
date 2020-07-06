@@ -31,7 +31,6 @@ public class Solution {
             dfs(result, item, i+1, nums);
             item.remove(item.size()-1);
         }
-        Arrays.sort();
     }
 
 }

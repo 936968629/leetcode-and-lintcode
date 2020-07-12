@@ -10,7 +10,10 @@ public class Solution {
         int cols = obstacleGrid[0].length;
 
         int[][] dp = new int[rows][cols];
-        dp[0][0] = obstacleGrid[0][0] == 1 ? 0:1;
+        if (obstacleGrid[0][0] == 1) {
+            return 0;
+        }
+        dp[0][0] = 0;
         for (int i = 1; i < rows; i++) {
             if (obstacleGrid[i][0] == 1) {
                 dp[i][0] = 0;

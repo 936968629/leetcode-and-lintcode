@@ -1,5 +1,8 @@
 package lintcode._101_200._105;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Solution {
     private class RandomListNode{
         int label;
@@ -37,7 +40,6 @@ public class Solution {
         }
         return head;
     }
-
     public RandomListNode splitNode(RandomListNode head) {
         RandomListNode dummy = new RandomListNode(-1);
         dummy.next = head;
@@ -47,5 +49,9 @@ public class Solution {
             cur = cur.next;
         }
         return dummy.next;
+    }
+
+    public static void main(String[] args) {
+        Map<String, String> map = new HashMap<>();
     }
 }

@@ -6,29 +6,47 @@ public class Solution {
         if (head == null){
             return null;
         }
-
-        Node cur = head;
-        while (cur != null){
-            Node new_node = new Node(cur.val, null, null);
-            new_node.next = cur.next;
-            cur.next = new_node;
-            cur = cur.next.next;
-        }
-
-        cur = head;
-        while (cur != null){
-            cur.next.random = cur.random.next;
-            cur = cur.next.next;
-        }
-        Node dummy = new Node(1, null, null);
-        dummy.next = head;
-        cur = dummy;
-        while (cur.next != null){
-            Node next = cur.next.next;
-            cur.next = next;
-            cur = cur.next;
-        }
-        return dummy.next;
+        head = copyNode(head);
+        copyRandom(head);
+        Node remove = remove(head);
+        return remove.next;
     }
 
+    public Node copyNode(Node head) {
+        Node cur = head;
+        while (cur != null) {
+            Node newNode = new Node(head.val);
+            Node next = cur.next;
+            cur.next = newNode;
+            newNode.next = next;
+            cur = cur.next.next;
+        }
+        return head;
+    }
+
+    public void copyRandom(Node head) {
+        Node cur = head;
+        while (cur != null) {
+            Node random = cur.random;
+            Node next = cur.next;
+            if (random == null) {
+                next.random = null;
+            }else {
+                next.random = random.next;
+            }
+            cur = next.next;
+        }
+
+    }
+
+    public Node remove(Node head) {
+        Node dummy = new Node(-1);
+        dummy.next = head;
+        Node cur = dummy;
+        while (cur.next != null) {
+            cur.next = cur.next.next;
+            cur = cur.next;
+        }
+        return dummy;
+    }
 }

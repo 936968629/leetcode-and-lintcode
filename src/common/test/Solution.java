@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Solution {
 
+    
 
     public int findMin(int[] nums) {
         // write your code here

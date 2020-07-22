@@ -34,6 +34,26 @@ public class Test {
         return res;
     }
 
+    public int findMin(int[] nums) {
+        int length = nums.length;
+        if (length == 0) {
+            return -1;
+        }
+        int left = 0;
+        int right = length - 1;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < nums[right]) {
+                right = mid;
+            }else if (nums[mid] > nums[right]){
+                left = mid;
+            }else {
+                right--;
+            }
+        }
+        return nums[left] > nums[right] ? nums[right]:nums[left];
+    }
+
     public static void main(String[] args) {
         try {
             Class<?> aClass = Class.forName("common.test.Solution");

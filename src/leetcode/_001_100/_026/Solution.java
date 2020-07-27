@@ -24,4 +24,21 @@ public class Solution {
         return i+1;
     }
 
+    public int removeDuplicates2(int[] nums) {
+        int length = nums.length;
+        if (nums.length <= 1) {
+            return length;
+        }
+        //[0,index]表示没有重复元素的数组
+        int index= 0;
+        for (int i = 1; i < length; i++) {
+            if (nums[index] != nums[i]) {
+                nums[index+1] = nums[i];
+                index++;
+            }
+        }
+        return index+1;
+
+    }
+
 }

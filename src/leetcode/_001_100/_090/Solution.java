@@ -1,4 +1,4 @@
-package lintcode._001_100._018;
+package leetcode._001_100._090;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,30 +7,27 @@ import java.util.List;
 public class Solution {
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        // write your code here
+        int length = nums.length;
         List<List<Integer>> result = new ArrayList<>();
-        if ( nums.length == 0 ) {
-            result.add(new ArrayList<>());
+        if (length == 0) {
             return result;
         }
-
         Arrays.sort(nums);
-
-        dfs(result, new ArrayList<>(), 0, nums);
+        dfs(result, new ArrayList<>(), nums, 0);
         return result;
     }
 
-    public void dfs(List<List<Integer>> result, List<Integer> item, int index, int[] nums) {
+    public void dfs(List<List<Integer>> result, List<Integer> item, int[] nums, int index) {
         result.add(new ArrayList<>(item));
-
         for (int i = index; i < nums.length; i++) {
-            if ( i > index && nums[i] == nums[i-1] ) {
+            if (i > index && nums[i] == nums[i-1]) {
                 continue;
             }
             item.add(nums[i]);
-            dfs(result, item, i+1, nums);
+            dfs(result, item, nums, i+1);
             item.remove(item.size()-1);
         }
     }
+
 
 }

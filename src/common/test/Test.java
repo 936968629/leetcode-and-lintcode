@@ -1,5 +1,6 @@
 package common.test;
 
+import com.sun.imageio.plugins.common.I18N;
 import common.sort.Fast;
 
 import java.lang.reflect.InvocationTargetException;
@@ -34,37 +35,10 @@ public class Test {
         return res;
     }
 
-    public int findMin(int[] nums) {
-        int length = nums.length;
-        if (length == 0) {
-            return -1;
-        }
-        int left = 0;
-        int right = length - 1;
-        while (left + 1 < right) {
-            int mid = left + (right - left) / 2;
-            if (nums[mid] < nums[right]) {
-                right = mid;
-            }else if (nums[mid] > nums[right]){
-                left = mid;
-            }else {
-                right--;
-            }
-        }
-        return nums[left] > nums[right] ? nums[right]:nums[left];
-    }
-
     public static void main(String[] args) {
-        try {
-            Class<?> aClass = Class.forName("common.test.Solution");
-            Solution fast = (Solution) aClass.newInstance();
-            int[] nums ={12,2,3};
-            Method method = aClass.getDeclaredMethod("findMin", int[].class);
-            Object invoke = method.invoke(fast, nums);
-            System.out.println(invoke.toString());
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+
+        Test test = new Test();
+
     }
 
 }

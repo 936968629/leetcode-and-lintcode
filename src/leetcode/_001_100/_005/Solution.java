@@ -7,21 +7,38 @@ public class Solution {
         if (length == 0) {
             return "";
         }
-        boolean[][] dp = new boolean[length+1][length+1];
-        for (int i = 0; i < length + 1; i++) {
-            dp[0][i] = false;
+        boolean[][] dp = new boolean[length][length];
+        for (int i = 0; i < length; i++) {
+            dp[i][i] = true;
         }
-        for (int i = 0; i < length + 1; i++) {
-            dp[i][0] = false;
-        }
-        for (int i = 1; i < length + 1; i++) {
-            for (int j = 1; j < length + 1; j++) {
-
+        int maxLen = 0;
+        int begin = 0;
+        for(int j=1; j< length; j++) {
+            for(int i=0; i<j; i++) {
+                if(s.charAt(i) != s.charAt(j))
+                {
+                    dp[i][j] = false;
+                } else {
+                    // 两端相等，且长度小于等于3，必为回文串
+                    if(j-i < 3)     // 当前字符串长度小于等于3（子串为0或1）
+                    {
+                        dp[i][j] = true;
+                    }
+                    // 两端相等，是否为回文，取决于其子串
+                    else
+                    {
+                        dp[i][j] = dp[i+1][j-1];
+                    }
+                }
+                if(dp[i][j] && (j-i+1>maxLen))
+                {
+                    maxLen = j - i + 1;
+                    begin = i;
+                }
             }
         }
 
-
-        return "";
+        return s.substring(begin, begin + maxLen);
     }
 
     public static void main(String[] args) {

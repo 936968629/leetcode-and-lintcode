@@ -1,4 +1,4 @@
-package leetcode._138;
+package leetcode._101_200._138;
 
 class Node {
     public int val;

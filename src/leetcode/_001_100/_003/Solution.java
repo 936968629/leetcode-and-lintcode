@@ -11,31 +11,31 @@ public class Solution {
             return 0;
         }
         int[] letters = new int[256];
+        int res = 0;
+        int left = 0;
         int right = 0;
         int count = 0;
-        int left = 0;
-        int res = 0;
         while (right < length) {
-            char rightCh = s.charAt(right);
-            if (letters[rightCh] == 0) {
-                letters[rightCh]++;
-            }else if (letters[rightCh] > 0) {
-                letters[rightCh]++;
+            char item = s.charAt(right);
+            if (letters[item] == 0) {
+                letters[item] = 1;
+            }else {
+                letters[item]++;
                 count++;
             }
-            right++;
 
             while (count > 0) {
                 char leftCh = s.charAt(left);
                 if (letters[leftCh] > 1) {
                     count--;
                     letters[leftCh]--;
-                }else if (letters[leftCh] == 1) {
-                    letters[leftCh]--;
+                }else {
+                    letters[leftCh] = 0;
                 }
                 left++;
             }
-            res = Math.max(res, right-left);
+            res = Math.max(res, right-left+1);
+            right++;
         }
         return res;
     }

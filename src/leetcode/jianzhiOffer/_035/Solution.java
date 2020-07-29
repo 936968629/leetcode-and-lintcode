@@ -1,6 +1,20 @@
-package leetcode._138;
+package leetcode.jianzhiOffer._035;
+
+import java.util.List;
 
 public class Solution {
+
+    class Node {
+        int val;
+        Node next;
+        Node random;
+
+        public Node(int val) {
+            this.val = val;
+            this.next = null;
+            this.random = null;
+        }
+    }
 
     public Node copyRandomList(Node head) {
         if (head == null){
@@ -8,18 +22,17 @@ public class Solution {
         }
         head = copyNode(head);
         copyRandom(head);
-        Node remove = remove(head);
-        return remove.next;
+        return split(head);
     }
 
     public Node copyNode(Node head) {
         Node cur = head;
         while (cur != null) {
-            Node newNode = new Node(head.val);
+            Node newNode = new Node(cur.val);
             Node next = cur.next;
             cur.next = newNode;
             newNode.next = next;
-            cur = cur.next.next;
+            cur = next;
         }
         return head;
     }
@@ -27,26 +40,30 @@ public class Solution {
     public void copyRandom(Node head) {
         Node cur = head;
         while (cur != null) {
-            Node random = cur.random;
             Node next = cur.next;
+            Node random = cur.random;
             if (random == null) {
                 next.random = null;
             }else {
-                next.random = random.next;
+                next.random = cur.random.next;
             }
             cur = next.next;
         }
-
     }
 
-    public Node remove(Node head) {
-        Node dummy = new Node(-1);
-        dummy.next = head;
-        Node cur = dummy;
-        while (cur.next != null) {
-            cur.next = cur.next.next;
+    public Node split(Node head) {
+        Node dummy = new Node(1);
+        Node cur = head;
+        Node curNow = dummy;
+
+        while (cur != null) {
+            curNow.next = cur.next;
+            curNow = curNow.next;
+            cur.next = curNow.next;
             cur = cur.next;
         }
-        return dummy;
+
+        return dummy.next;
     }
+
 }

@@ -1,5 +1,7 @@
 package leetcode._001_100._005;
 
+import java.util.*;
+
 public class Solution {
 
     public String longestPalindrome(String s) {
@@ -31,6 +33,13 @@ public class Solution {
 
         ThreadLocal<String> mmap2 = new ThreadLocal<>();
         mmap2.set("dsaa");
+
+        new LinkedHashMap<>();
+        new WeakHashMap<>();
+        new TreeMap<>();
+
+        new ArrayList<>();
+        new TreeSet<>();
     }
 
 }

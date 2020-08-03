@@ -10,6 +10,7 @@ public class Solution {
         if (length <= 1) {
             return 0;
         }
+        //
         int res= 0;
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < length; i++) {
@@ -27,7 +28,6 @@ public class Solution {
         }
         return res;
     }
-
 
 
 

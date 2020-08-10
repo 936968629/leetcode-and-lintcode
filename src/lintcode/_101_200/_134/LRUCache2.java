@@ -107,10 +107,10 @@ public class LRUCache2 {
 
     public static void main(String[] args) {
         LRUCache2 lruCache2 = new LRUCache2(2);
-        lruCache2.set(2, 1);
+        lruCache2.set(2, 21);
         lruCache2.set(1, 1);
         lruCache2.get(2);
-        lruCache2.set(4,1);
+        lruCache2.set(4,4);
         lruCache2.get(1);
         lruCache2.get(2);
     }

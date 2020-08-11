@@ -28,6 +28,8 @@ public class Fast {
 
             if ( i < j ) {
                 swap(nums, i, j);
+                i++;
+                j--;
             }
 
         }

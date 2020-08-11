@@ -23,13 +23,29 @@ public class Solution {
         return false;
     }
 
+    public boolean canJump2(int[] nums) {
+        int length = nums.length;
+        if (length <= 1) {
+            return true;
+        }
 
+        int most = 0;
+        for (int i = 0; i < length; i++) {
+            if (i <= most) {
+                most = Math.max(most, i + nums[i]);
+                if (most >= length -1) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        int[] nums = {2,1,1,1,3};
-        solution.canJump(nums);
+        int[] nums = {3,2,1,0,3};
+        System.out.println(solution.canJump2(nums));
     }
 
 }

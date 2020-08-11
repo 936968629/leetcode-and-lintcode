@@ -1,6 +1,5 @@
 package leetcode._001_100._042;
 
-
 import java.util.Stack;
 
 public class Solution {

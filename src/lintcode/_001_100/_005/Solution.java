@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Solution {
 
@@ -50,22 +51,23 @@ public class Solution {
 
     public int partition(int[] nums,int start,int end){
         int flag = nums[start];
-        int i = start;
+        int i = start + 1;
         int j = end;
         while ( i <= j ) {
-
-            while ( i <= j && nums[j] <= flag  ) {
-                j--;
-            }
             while ( i <= j && nums[i] > flag ) {
                 i++;
             }
+            while ( i <= j && nums[j] <= flag  ) {
+                j--;
+            }
+
             if ( i < j ) {
                 swap(nums, i, j);
             }
 
         }
-        return i;
+        swap(nums, start, j);
+        return j;
     }
 
     public void swap(int[] nums, int i , int j) {
@@ -77,10 +79,12 @@ public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
         int n = 1;
-        int[] nums = {1,3,4,2,1};
+        int[] nums = {3,1,2,4};
 //        sol.kthLargestElement(n, nums);
         int i = sol.kthLargestElement2(n, nums);
         System.out.println(i);
+
+        new ConcurrentHashMap<>(6);
     }
 
 }

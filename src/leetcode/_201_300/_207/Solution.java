@@ -1,41 +1,40 @@
 package leetcode._201_300._207;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Solution {
 
-
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        //入度
-        int[] indegrees = new int[numCourses];
+        int[] ingree = new int[numCourses];
         List<List<Integer>> adjacency = new ArrayList<>();
-        Queue<Integer> queue = new LinkedList<>();
         for(int i = 0; i < numCourses; i++) {
             adjacency.add(new ArrayList<>());
         }
-        // Get the indegree and adjacency of every course.
-        for(int[] cp : prerequisites) {
-            indegrees[cp[0]]++;
-            adjacency.get(cp[1]).add(cp[0]);
+        int rows = prerequisites.length;
+        for (int i = 0; i < rows; i++) {
+            ingree[prerequisites[i][0]] ++;
+            adjacency.get(prerequisites[i][1]).add(prerequisites[i][0]);
         }
 
-        // Get all the courses with the indegree of 0.
-        for(int i = 0; i < numCourses; i++) {
-            if (indegrees[i] == 0) {
+
+        LinkedList<Integer> queue = new LinkedList<>();
+        for (int i = 0; i < numCourses; i++) {
+            if (ingree[i] == 0) {
                 queue.add(i);
             }
         }
-
+        int courseNum = numCourses;
         while (!queue.isEmpty()) {
-            Integer poll = queue.poll();
-            numCourses--;
-
+            Integer item = queue.removeFirst();
+            courseNum--;
+            for (int idx : adjacency.get(item)) {
+                ingree[idx]--;
+                if (ingree[idx] == 0) {
+                    queue.addLast(idx);
+                }
+            }
         }
-
-        return true;
+        return courseNum == 0;
     }
 
     public static void main(String[] args) {

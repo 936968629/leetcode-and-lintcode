@@ -28,8 +28,11 @@ public class MaxTaskQueue<R extends Runnable> extends LinkedBlockingQueue<Runnab
             throw new RejectedExecutionException("executor is null");
         }
         int currentPoolThreadSize = executor.getPoolSize();
-        AtomicLong submmitTaskCount = executor.getSubmmitTaskCount();
-        
+        Long submmitTaskCount = executor.getSubmmitTaskCount();
+
+        if (submmitTaskCount < currentPoolThreadSize) {
+            return super.offer(runnable);
+        }
 
         if (currentPoolThreadSize < executor.getMaximumPoolSize() ) {
             return false;

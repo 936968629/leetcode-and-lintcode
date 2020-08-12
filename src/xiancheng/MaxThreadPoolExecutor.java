@@ -14,8 +14,8 @@ public class MaxThreadPoolExecutor extends ThreadPoolExecutor {
         super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
     }
 
-    public AtomicLong getSubmmitTaskCount() {
-        return this.submmitTaskCount;
+    public long getSubmmitTaskCount() {
+        return this.submmitTaskCount.get();
     }
 
     @Override

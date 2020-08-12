@@ -9,8 +9,6 @@ import java.util.*;
 
 public class Test {
 
-
-
     public void buildHeap(int[] nums) {
         int length = nums.length;
         //大顶堆
@@ -83,12 +81,26 @@ public class Test {
         return nums[start];
     }
 
+    public void maopao(int[] nums) {
+        int length = nums.length;
+        for (int i = 0; i < length; i++) {
+
+            for (int j = 0; j < length - i - 1; j++) {
+                if (nums[j] > nums[j+1]) {
+                    swap(nums, j, j+1);
+                }
+            }
+
+        }
+    }
+
     public static void main(String[] args) {
 
         Test test = new Test();
         int[] nusm = {1,5,1,2,4,7};
 //        test.buildHeap(nusm);
-        test.quickSort(nusm);
+//        test.quickSort(nusm);
+        test.maopao(nusm);
         System.out.println(Arrays.toString(nusm));
     }
 

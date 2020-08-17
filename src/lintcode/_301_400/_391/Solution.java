@@ -55,4 +55,27 @@ public class Solution {
         }
         return res;
     }
+
+    public int countOfAirplanes2(List<Interval> airplanes) {
+        // write your code here
+//        int length = airplanes.size();
+//        if (length == 0) {
+//            return 0;
+//        }
+//        Collections.sort(airplanes, (o1,o2) -> {
+//            return o1.end - o2.end;
+//        });
+//
+//        int prevEnd = airplanes.get(0).end;
+//        int res = 1;
+//        for (int i = 1; i < length; i++) {
+//            Interval item = airplanes.get(i);
+//            if (item.start <= prevEnd) {
+//                res++;
+//                prevEnd = item.end;
+//            }
+//        }
+//        return res;
+        return -1;
+    }
 }

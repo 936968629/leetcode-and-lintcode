@@ -11,6 +11,7 @@ public class Solution {
     /** Returns a random node's value. */
     public int getRandom() {
 
+        return -1;
     }
 
 }

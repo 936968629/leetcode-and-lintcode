@@ -34,8 +34,10 @@ public class Solution {
             while ( i <= j && nums[j] > flag) {
                 j--;
             }
-            if ( i < j ) {
+            if ( i <= j ) {
                 swap(nums, i, j);
+                i++;
+                j--;
             }
 
         }

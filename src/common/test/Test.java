@@ -84,15 +84,15 @@ public class Test {
     public void maopao(int[] nums) {
         int length = nums.length;
         for (int i = 0; i < length; i++) {
-
             for (int j = 0; j < length - i - 1; j++) {
                 if (nums[j] > nums[j+1]) {
                     swap(nums, j, j+1);
                 }
             }
-
         }
     }
+
+
 
     public static void main(String[] args) {
 
@@ -102,6 +102,9 @@ public class Test {
 //        test.quickSort(nusm);
         test.maopao(nusm);
         System.out.println(Arrays.toString(nusm));
+
+        List<Integer> nums = new ArrayList<>();
+
     }
 
 }

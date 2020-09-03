@@ -1,5 +1,6 @@
 package leetcode._201_300._295;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -14,20 +15,9 @@ public class MedianFinder {
     }
 
     public void addNum(int num) {
-        if (maxHeap.isEmpty()) {
-            maxHeap.offer(num);
-            return;
-        }
-        if (maxHeap.peek() >= num) {
-            maxHeap.offer(num);
-        }else {
-            minHeap.offer(num);
-        }
-
-        //调整
-        if (maxHeap.size() == minHeap.size() + 2) {
-            minHeap.offer(maxHeap.poll());
-        }else if (minHeap.size() == maxHeap.size() + 2) {
+        maxHeap.offer(num);
+        minHeap.offer(maxHeap.poll());
+        if (minHeap.size() > maxHeap.size()) {
             maxHeap.offer(minHeap.poll());
         }
     }

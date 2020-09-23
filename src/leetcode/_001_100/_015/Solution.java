@@ -38,6 +38,45 @@ public class Solution {
         }
     }
 
+    public List<List<Integer>> threeSum2(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        int length = nums.length;
+        if (length < 3) {
+            return result;
+        }
+        Arrays.sort(nums);
+        for (int i = 0; i < length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            int sign = nums[i];
+            int start = i+1;
+            int end = length - 1;
+            while (start < end) {
+                if (sign + nums[start] + nums[end] == 0) {
+                    List<Integer> item = new ArrayList<>();
+                    item.add(sign);
+                    item.add(nums[start]);
+                    item.add(nums[end]);
+                    result.add(new ArrayList<>(item));
+                    start++;
+                    end--;
+                    //去重
+                    while (start < end && nums[start] == nums[start-1]) {
+                        start++;
+                    }
+                    while (start < end && nums[end] == nums[end + 1]) {
+                        end--;
+                    }
+                }else if (sign + nums[start] + nums[end] < 0) {
+                    start++;
+                }else {
+                    end--;
+                }
+            }
+        }
 
+        return result;
+    }
 
 }

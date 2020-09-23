@@ -40,4 +40,33 @@ public class Solution {
         return res;
     }
 
+    public int lengthOfLongestSubstring2(String s) {
+        int length = s.length();
+        if (length == 0) {
+            return 0;
+        }
+
+        int[] show = new int[256];
+
+        int left = 0;
+        int right = 0;
+        int res = 0;
+        while (right < length) {
+            if (show[s.charAt(right)] == 0) {
+                show[s.charAt(right)]++;
+            }else {
+                show[s.charAt(right)]++;
+                while (show[s.charAt(right)] > 1) {
+                    char leftC = s.charAt(left);
+                    show[leftC]--;
+                    left++;
+                }
+            }
+
+            res = Math.max(right-left+1, res);
+            right++;
+        }
+        return res;
+    }
+
 }

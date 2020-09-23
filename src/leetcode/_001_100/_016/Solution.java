@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Solution {
 
-
     private int min = Integer.MAX_VALUE;
     private int res = 0;
     public int threeSumClosest(int[] nums, int target) {
@@ -34,6 +33,46 @@ public class Solution {
             item.remove(item.size()-1);
         }
 
+    }
+
+    public int threeSumClosest2(int[] nums, int target) {
+        int length = nums.length;
+        if (length < 3) {
+            return -1;
+        }
+        Arrays.sort(nums);
+        for (int i = 0; i < length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            int first = nums[i];
+            int start = i+1;
+            int end = length - 1;
+            while (start < end) {
+                int total = first + nums[start] + nums[end];
+                if (total == target) {
+                    return total;
+                }
+                if ( Math.abs(total-target) < min ) {
+                    min = Math.abs(total-target);
+                    res = total;
+                }
+                if (total > target) {
+                    end--;
+                }else {
+                    start++;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {-3,-2,-5,3,-4};
+        int i = solution.threeSumClosest2(nums, -1);
+        System.out.println(i);
     }
 
 }

@@ -13,7 +13,6 @@ public class Solution {
             return result;
         }
         boolean[] visited = new boolean[nums.length];
-        Arrays.fill(visited, false);
         Arrays.sort(nums);
         dfs(result, new ArrayList<>(), nums, 0, visited);
         return result;
@@ -24,17 +23,19 @@ public class Solution {
             result.add(new ArrayList<>(item));
             return;
         }
+
         for (int i = 0; i < nums.length; i++) {
-            if (!visited[i]) {
-                if (i > 0 && nums[i] == nums[i-1] && visited[i-1]) {
-                    continue;
-                }
-                item.add(nums[i]);
-                visited[i] = true;
-                dfs(result, item, nums, i+1, visited);
-                item.remove(item.size()-1);
-                visited[i] = false;
+            if (i > 0 && nums[i] == nums[i-1] && visited[i-1]) {
+                continue;
             }
+            if (visited[i]) {
+                continue;
+            }
+            item.add(nums[i]);
+            visited[i] = true;
+            dfs(result, item, nums, 0, visited);
+            visited[i] = false;
+            item.remove(item.size()-1);
         }
     }
 

@@ -5,40 +5,33 @@ import java.util.*;
 public class Solution {
 
     public boolean isValid(String s) {
-        //给定一个只包括 '('，')'，'{'，'}'，'['，']'
         int length = s.length();
-        if ( length == 0 ) {
+        if (length == 0) {
             return true;
         }
-        List<String> left = Arrays.asList("(", "[", "{");
-        List<String> right = Arrays.asList(")", "]", "}");
-
-        Stack<String> stack = new Stack<>();
-        char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char item = chars[i];
-            int size = stack.size();
-            if ( size == 0 ) {
-                stack.push(String.valueOf(item));
+        Stack<Character> stack = new Stack<>();
+        List<Character> Llist = Arrays.asList('(', '[', '{');
+        for (int i = 0; i < length; i++) {
+            if (Llist.contains(s.charAt(i))) {
+                stack.push(s.charAt(i));
             }else {
-                String peek = stack.peek();
-                if ( left.contains(peek) ) {
-                    if ( peek.equals("(") && String.valueOf(item).equals(")")) {
+                if (stack.isEmpty()) {
+                    return false;
+                }else {
+                    Character peek = stack.peek();
+                    char item = s.charAt(i);
+                    if ( (peek == '(' && item == ')') || (peek == '[' && item == ']') || (peek == '{' && item == '}') ) {
                         stack.pop();
-                    }else if ( peek.equals("[") && String.valueOf(item).equals("]") ) {
-                        stack.pop();
-                    }else if ( peek.equals("{") && String.valueOf(item).equals("}") ) {
-                        stack.pop();
-                    } else {
-                        stack.push(String.valueOf(item));
+                    }else {
+                        return false;
                     }
-
-                }else{
-                    stack.push(peek);
                 }
             }
         }
-        return stack.isEmpty();
+
+        return stack.isEmpty() ? true : false;
     }
+
+
 
 }

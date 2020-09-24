@@ -6,22 +6,24 @@ import lintcode.TreeNode;
 public class Solution {
 
     public TreeNode sortedListToBST(ListNode head) {
-        if(head == null) {
+        if (head == null) {
             return null;
         }
-        ListNode dummyHead = new ListNode(0);
-        dummyHead.next = head;
+        if (head.next == null) {
+            return new TreeNode(head.val);
+        }
+        ListNode slow = head;
         ListNode fast = head;
-        ListNode slow = dummyHead;
-        while(fast != null && fast.next != null) {
+        ListNode pre = null;
+        while (fast != null && fast.next != null) {
+            pre = slow;
             slow = slow.next;
             fast = fast.next.next;
         }
-        ListNode midNode = slow.next;
-        TreeNode treeNode = new TreeNode(midNode.val);
-        slow.next = null;
-        treeNode.left = sortedListToBST(dummyHead.next);
-        treeNode.right = sortedListToBST(midNode.next);
+        pre.next = null;
+        TreeNode treeNode = new TreeNode(slow.val);
+        treeNode.left = sortedListToBST(head);
+        treeNode.right = sortedListToBST(slow.next);
         return treeNode;
     }
 

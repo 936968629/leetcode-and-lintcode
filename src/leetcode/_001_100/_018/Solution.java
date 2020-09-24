@@ -37,38 +37,57 @@ public class Solution {
 
     public List<List<Integer>> fourSum2(int[] nums, int target) {
         List<List<Integer>> result = new ArrayList<>();
-        if (nums == null || nums.length < 4) return result;
-
+        if (nums == null || nums.length < 4) {
+            return result;
+        }
+        int length = nums.length;
         // 排序
         Arrays.sort(nums);
 
-        int len =  nums.length - 3;
-
-        for (int i = 0; i < len; i++) {
-            // 去重
-            if (i > 0 && nums[i] == nums[i - 1]) continue;
-            for (int j = nums.length - 1; j > i + 1; j--) {
-                int L = i + 1;
-                int R = j - 1;
-                while (R > L) {
-                    int sum = nums[i] + nums[L] + nums[R] + nums[j];
-                    if (sum == target) {
-                        // 由于尾指针去重不了，所以加了一层校验，这一块待优化
-                        List<Integer> list = Arrays.asList(nums[i], nums[L], nums[R], nums[j]);
-                        if (!result.contains(list)) {
-                            result.add(list);
+        for (int i = 0; i < length - 3; i++) {
+            int first = nums[i];
+            if (i > 0 && nums[i] == nums[i-1]) {
+                continue;
+            }
+            for (int j = i+1; j < length - 2; j++) {
+                if (j > i+1 && nums[j] == nums[j-1]) {
+                    continue;
+                }
+                int sec = nums[j];
+                int start = j+1;
+                int end = length - 1;
+                while (start < end) {
+                    if (first + sec + nums[start] + nums[end] == target) {
+                        List<Integer> item = new ArrayList<>();
+                        item.add(first);
+                        item.add(sec);
+                        item.add(nums[start]);
+                        item.add(nums[end]);
+                        result.add(item);
+                        start++;
+                        end--;
+                        while (start < end && nums[start] == nums[start-1]) {
+                            start++;
                         }
-                        while (R > L && nums[R - 1] == nums[R]) R--; // 去重
-                        while (R > L && nums[L + 1] == nums[L]) L++; // 去重
-                        L++;
-                        R--;
+                        while (start < end && nums[end] == nums[end+1]) {
+                            end--;
+                        }
+                    }else if (first + sec + nums[start] + nums[end] > target) {
+                        end--;
+                    }else {
+                        start++;
                     }
-                    if (sum > target) R--;
-                    if (sum < target) L++;
                 }
             }
         }
+
         return result;
     }
 
+    public static void main(String[] args) {
+        int[] nums = {-1,0,1,2,-1,-4};
+        int target = -1;
+        Solution solution = new Solution();
+        solution.fourSum2(nums, target);
+    }
 }

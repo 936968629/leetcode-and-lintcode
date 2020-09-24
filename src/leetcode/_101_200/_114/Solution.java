@@ -12,15 +12,15 @@ public class Solution {
         flatten(root.right);
 
         TreeNode leftNode = root.left;
-        if (leftNode != null) {
-            TreeNode cur = leftNode;
-            while (cur.right != null) {
-                cur = cur.right;
-            }
-            cur.right = root.right;
-            root.right = leftNode;
-            root.left = null;
+        TreeNode rightNode = root.right;
+
+        root.left = null;
+        root.right = leftNode;
+        TreeNode cur = root;
+        while (cur.right != null) {
+            cur = cur.right;
         }
+        cur.right = rightNode;
     }
 
 }

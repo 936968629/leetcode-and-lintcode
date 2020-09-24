@@ -1,5 +1,6 @@
 package common.test;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -53,6 +54,7 @@ public class Solution {
         nums[i] = nums[j];
         nums[j] = temp;
     }
+
 
     public static void main(String[] args) {
         Solution sol = new Solution();

@@ -1,5 +1,7 @@
 package leetcode._001_100._069;
 
+import java.math.BigDecimal;
+
 public class Solution {
 
     public int mySqrt(int x) {
@@ -10,7 +12,7 @@ public class Solution {
             return 1;
         }
         long left = 1;
-        long right = x / 2;
+        long right = x;
         while ( left + 1 < right ) {
             long middle = left + (right - left) / 2;
             if (middle * middle == x) {
@@ -28,6 +30,31 @@ public class Solution {
             return (int) left;
         }
         return 0;
+    }
+
+    public float sprt(int num) {
+
+        float left = 1f;
+        float right = (float)num;
+
+        while (left + 0.01 < right) {
+            float mid = left + (right - left) / 2;
+            BigDecimal bigDecimal = new BigDecimal(mid);
+            mid = bigDecimal.setScale(2, BigDecimal.ROUND_DOWN).floatValue();
+            if (left == mid || right == mid) {
+                break;
+            }
+            if (mid * mid <= num) {
+                left = mid;
+            }else {
+                right = mid;
+            }
+        }
+
+        if (right * right <= num) {
+            return right;
+        }
+        return left;
     }
 
 }

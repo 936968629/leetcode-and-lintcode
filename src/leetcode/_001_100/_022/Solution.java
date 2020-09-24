@@ -30,4 +30,19 @@ public class Solution {
             dfs(result, item+")",n, left, right-1);
         }
     }
+
+    public void dfs2(List<String> result, StringBuilder sb, int n, int left, int right) {
+        if (left == 0 && right == 0) {
+            result.add(sb.toString());
+            return;
+        }
+        if (left > 0) {
+            dfs2(result, sb.append("("), n, left - 1, right);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        if (right > left) {
+            dfs2(result, sb.append(")"), n, left, right-1);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    }
 }

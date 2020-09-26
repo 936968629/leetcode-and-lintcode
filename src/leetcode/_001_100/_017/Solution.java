@@ -37,6 +37,22 @@ public class Solution {
 
     }
 
+    public void dfs2(List<String> result, StringBuilder sb, int index, String digits, Map<String, String> map) {
+        if (sb.length() == digits.length()) {
+            result.add(sb.toString());
+            return;
+        }
+
+        for (int i = index; i < digits.length(); i++) {
+            String s = map.get(String.valueOf(digits.charAt(i)));
+            for (int j = 0; j < s.length(); j++) {
+                sb.append(s.charAt(j));
+                dfs2(result, sb, i+1, digits, map);
+                sb.deleteCharAt(sb.length()-1);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Solution solution = new Solution();
         List<String> list = solution.letterCombinations("22");

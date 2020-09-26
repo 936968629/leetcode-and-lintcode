@@ -7,24 +7,24 @@ public class Solution {
         if (length <= 1) {
             return;
         }
-        int i = length - 1;
-        while (i > 0) {
-            if (nums[i] > nums[i-1]) {
+        int right = length - 1;
+        while (right > 0) {
+            if (nums[right] > nums[right-1]) {
                 break;
             }
-            i--;
+            right--;
         }
-        if (i == 0) {
-            reverse(nums, 0, length-1);
+        if (right == 0) {
+            reverse(nums, 0, length - 1);
             return;
         }
-        int j = i - 1;
+        int last = right - 1;
         int end = length - 1;
-        while (nums[j] > nums[end]) {
+        while (nums[last] > nums[end]) {
             end--;
         }
-        swap(nums, j, end);
-        reverse(nums, i, length - 1);
+        swap(nums, last, end);
+        reverse(nums, right, length - 1);
     }
 
     public void reverse(int[] nums ,int start, int end) {

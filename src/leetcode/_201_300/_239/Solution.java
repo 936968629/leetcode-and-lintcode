@@ -4,54 +4,6 @@ import java.util.*;
 
 public class Solution {
 
-    class MaxQueue{
-        private LinkedList<Integer> queue;
-        public MaxQueue() {
-            queue = new LinkedList<>();
-        }
-
-        public void push(int item) {
-            while (!queue.isEmpty() && queue.getLast() < item) {
-                queue.removeLast();
-            }
-            queue.addLast(item);
-        }
-
-        public int getMax() {
-            return queue.isEmpty() ? -1:queue.getFirst();
-        }
-
-        public void pop(int item) {
-            if (queue.isEmpty()) {
-                return ;
-            }
-            if (queue.getFirst() == item) {
-                queue.removeFirst();
-            }
-        }
-    }
-
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        MaxQueue queue = new MaxQueue();
-        int length = nums.length;
-        if(nums.length * k == 0) return new int[0];
-        if(k==1) return nums;
-        int[] res = new int[length-k+1];
-        int index = 0;
-        //双端队列
-        MaxQueue maxQueue = new MaxQueue();
-        for (int i = 0; i < length; i++) {
-            if (i < k-1) {
-                maxQueue.push(nums[i]);
-            }else {
-                maxQueue.push(nums[i]);
-                res[index++] = maxQueue.getMax();
-                maxQueue.pop(nums[i-k+1]);
-            }
-        }
-        return res;
-    }
-
     public int[] maxSlidingWindow2(int[] nums, int k) {
         if (nums.length == 0){
             return new int[0];
@@ -72,6 +24,36 @@ public class Solution {
             queue.remove(nums[i]);
         }
         return result;
+    }
+
+    /**
+     * 单调队列
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int length = nums.length;
+        if (length == 0 || k > length) {
+            return null;
+        }
+        int[] res = new int[length - k + 1];
+        LinkedList<Integer> queue = new LinkedList<>();
+        int start = 0;
+        for (int i = 0; i < length; i++) {
+            while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
+                queue.pollLast();
+            }
+            queue.addLast(i);
+            if (i >= queue.peekFirst() + k) {
+                queue.pollFirst();
+            }
+            if (i >= k - 1) {
+                res[start] = nums[queue.peekFirst()];
+                start++;
+            }
+        }
+        return res;
     }
 
     public static void main(String[] args) {

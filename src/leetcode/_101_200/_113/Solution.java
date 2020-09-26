@@ -12,30 +12,35 @@ public class Solution {
         if (root == null) {
             return result;
         }
-        dfs(result, new ArrayList<>(), root, sum);
+        dfs(result, new ArrayList<>(), 0, root, sum);
         return result;
     }
 
-    public void dfs(List<List<Integer>> result, List<Integer> item, TreeNode root, int target) {
+    public void dfs(List<List<Integer>> result, List<Integer> item, int target, TreeNode root, int sum) {
         if (root.left == null && root.right == null) {
-            target = target - root.val;
-            item.add(root.val);
-            if (target == 0) {
+            if (target + root.val == sum) {
+                item.add(root.val);
                 result.add(new ArrayList<>(item));
+                item.remove(item.size() - 1);
+                return;
             }
-            target += root.val;
-            item.remove(item.size()-1);
             return;
         }
-        item.add(root.val);
-        target -= root.val;
+
         if (root.left != null) {
-            dfs(result, item, root.left, target);
+            target = target + root.val;
+            item.add(root.val);
+            dfs(result, item, target, root.left, sum);
+            target = target - root.val;
+            item.remove(item.size() - 1);
         }
         if (root.right != null) {
-            dfs(result, item, root.right, target);
+            target = target + root.val;
+            item.add(root.val);
+            dfs(result, item, target, root.right, sum);
+            target = target - root.val;
+            item.remove(item.size() - 1);
         }
-        item.remove(item.size()-1);
-        target += root.val;
+
     }
 }

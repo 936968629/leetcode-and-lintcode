@@ -11,39 +11,30 @@ public class Solution {
         if (k == 1) {
             return head;
         }
+
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
-        ListNode prev = dummy;
-        ListNode cur = head;
-        int i = 0;
-        ListNode startNode = null;
-        ListNode startNodePrev = null;
-        ListNode endNode = null;
-        ListNode endNodeNext = null;
+        ListNode cur = dummy;
+        int count = 0;
+        ListNode prev = null;
         while (cur != null) {
-            i++;
-            if (i == 1) {
-                startNodePrev = prev;
-                startNode = cur;
+            if (count == 0) {
                 prev = cur;
-                cur = cur.next;
-            }else if (i == k) {
-                endNode = cur;
-                endNodeNext = cur.next;
-                endNode.next = null;
-                startNodePrev.next = null;
-                //翻转
-                ListNode reverse = reverse(startNode);
-                startNodePrev.next = reverse;
-                startNode.next = endNodeNext;
-                cur = endNodeNext;
-                prev = startNode;
-                i = 0;
-            }else {
-                prev = cur;
-                cur = cur.next;
             }
-
+            if (count == k) {
+                ListNode next = cur.next;
+                ListNode first = prev.next;
+                prev.next = null;
+                cur.next = null;
+                ListNode reverse = reverse(first);
+                prev.next = reverse;
+                first.next = next;
+                cur = first;
+                count = 0;
+                prev = cur;
+            }
+            count++;
+            cur = cur.next;
         }
 
         return dummy.next;
@@ -60,5 +51,7 @@ public class Solution {
         }
         return prev;
     }
+
+
 
 }

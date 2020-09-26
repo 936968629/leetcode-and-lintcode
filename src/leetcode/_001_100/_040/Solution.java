@@ -35,4 +35,23 @@ public class Solution {
             item.remove(item.size()-1);
         }
     }
+
+    public void dfs2(List<List<Integer>> result, List<Integer> item, int[] candidates, int target, int index) {
+        if (target == 0) {
+            result.add(new ArrayList<>(item));
+            return;
+        }
+
+        for (int i = index; i < candidates.length; i++) {
+            if (i > index && candidates[i] == candidates[i-1]) {
+                continue;
+            }
+            if (target - candidates[i] >= 0 ) {
+                item.add(candidates[i]);
+                dfs2(result, item, candidates, target - candidates[i], i+1);
+                item.remove(item.size() - 1);
+            }
+        }
+    }
+
 }

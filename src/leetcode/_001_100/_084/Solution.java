@@ -30,6 +30,32 @@ public class Solution {
         return res;
     }
 
+    public int largestRectangleArea2(int[] heights) {
+        int length = heights.length;
+        if (length == 0) {
+            return 0;
+        }
+        if (length == 1) {
+            return heights[0];
+        }
+        int max = 0;
+        for (int i = 0; i < length; i++) {
+            int leftW = i - 1;
+            int rightW = i + 1;
+            int width = 1;
+            while (leftW >= 0 && heights[leftW] >= heights[i]) {
+                leftW--;
+                width++;
+            }
+            while (rightW <= length - 1 && heights[rightW] >= heights[i]) {
+                rightW++;
+                width++;
+            }
+            max = Math.max(max, width * heights[i]);
+        }
+        return max;
+    }
+
     public static void main(String[] args) {
         Solution solution = new Solution();
         int[] height = {2,1,2};

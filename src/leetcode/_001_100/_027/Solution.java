@@ -25,4 +25,20 @@ public class Solution {
         nums[j] = temp;
     }
 
+    public int removeElement2(int[] nums, int val) {
+        int length = nums.length;
+        if (length == 0) {
+            return 0;
+        }
+        int start = 0;
+        for (int i = 0; i < length; i++) {
+            if (val == nums[i]) {
+                continue;
+            }
+            nums[start] = nums[i];
+            start++;
+        }
+        return start;
+    }
+
 }

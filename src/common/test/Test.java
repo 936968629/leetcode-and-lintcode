@@ -8,8 +8,15 @@ import lintcode.TreeNode;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 public class Test {
+
+    public void swap(int[] nums, int left, int right) {
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+    }
 
 
     public boolean exist(char[][] board, String word) {
@@ -96,9 +103,61 @@ public class Test {
         
     }
 
+    public ListNode reverse(ListNode head) {
+        ListNode cur = head;
+        ListNode prev = null;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = prev;
+            prev= cur;
+            cur = next;
+        }
+        return prev;
+    }
+
+    public void reverse(int[] nums, int left, int right) {
+        while (left < right) {
+            swap(nums, left, right);
+            left++;
+            right--;
+        }
+    }
+
+    public int maxProfit(int[] prices) {
+
+        return 1;
+    }
+
+    public int largestRectangleArea(int[] heights) {
+        int length = heights.length;
+        if (length == 0) {
+            return 0;
+        }
+        if (length == 1) {
+            return heights[0];
+        }
+        int max = 0;
+        for (int i = 0; i < length; i++) {
+            int leftW = i - 1;
+            int rightW = i + 1;
+            int width = 1;
+            while (leftW >= 0 && heights[leftW] >= heights[i]) {
+                leftW--;
+                width++;
+            }
+            while (rightW <= length - 1 && heights[rightW] >= heights[i]) {
+                rightW++;
+                width++;
+            }
+            max = Math.max(max, width * heights[i]);
+        }
+        return max;
+    }
+
+
 
     public static void main(String[] args) {
-
+        CountDownLatch count = new CountDownLatch(4);
         Test test = new Test();
         int[] nusm = {1,1,3};
 

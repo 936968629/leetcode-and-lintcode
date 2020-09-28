@@ -28,20 +28,36 @@ public class Solution {
         if (length == 0) {
             return 1;
         }
-
-        for (int i = 0; i < nums.length; i++) {
-            while (nums[i] > 0 && nums[i] < length && nums[i] != i + 1) {
-
+        boolean oneFlag = false;
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == 1) {
+                oneFlag = true;
             }
-
+        }
+        if (!oneFlag) {
+            return 1;
+        }
+        for (int i = 0; i < length; i++) {
+           if (nums[i] <= 0 || nums[i] > length) {
+               nums[i] = 1;
+           }
         }
 
         for (int i = 0; i < length; i++) {
-            if (nums[i] != i+1) {
+            int item = Math.abs(nums[i]);
+            nums[item-1] = -Math.abs(nums[item-1]);
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (nums[i] > 0) {
                 return i+1;
             }
         }
-        return length;
+        return length+1;
+    }
+
+    public static void main(String[] args) {
+
     }
 
 }

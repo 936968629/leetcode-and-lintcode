@@ -128,33 +128,35 @@ public class Test {
         return 1;
     }
 
-    public int largestRectangleArea(int[] heights) {
-        int length = heights.length;
-        if (length == 0) {
-            return 0;
+    public int[][] insert(int[][] intervals, int[] newInterval) {
+        List<int[]> result = new ArrayList<>();
+        int rows = intervals.length;
+        if (rows == 0) {
+            int[][] res = new int[1][2];
+            res[0] = newInterval;
+            return res;
         }
-        if (length == 1) {
-            return heights[0];
-        }
-        int max = 0;
-        for (int i = 0; i < length; i++) {
-            int leftW = i - 1;
-            int rightW = i + 1;
-            int width = 1;
-            while (leftW >= 0 && heights[leftW] >= heights[i]) {
-                leftW--;
-                width++;
+        int add = 0;
+        for (int i = 0; i < rows; i++) {
+            int[] item = intervals[i];
+            if (item[1] < newInterval[0]) {
+                result.add(item);
+            }else if (item[0] > newInterval[1]){
+                if (add == 0) {
+                    add = 1;
+                    result.add(newInterval);
+                }
+                result.add(item);
+            }else {
+                newInterval[0] = Math.min(item[0], newInterval[0]);
+                newInterval[1] = Math.max(item[1], newInterval[1]);
             }
-            while (rightW <= length - 1 && heights[rightW] >= heights[i]) {
-                rightW++;
-                width++;
-            }
-            max = Math.max(max, width * heights[i]);
         }
-        return max;
+        if (add == 0) {
+            result.add(newInterval);
+        }
+        return result.toArray(new int[0][]);
     }
-
-
 
     public static void main(String[] args) {
         CountDownLatch count = new CountDownLatch(4);

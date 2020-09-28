@@ -61,9 +61,10 @@ public class Solution {
         int res = 0;
         int len = 0;
         for (int i = 0; i < length; i++) {
-            if (nums[i] == 1) {
+            if (nums[i] == 0) {
+                len++;
+            }else {
                 len = 0;
-                continue;
             }
             len++;
             res = Math.max(res, len);

@@ -81,6 +81,37 @@ public class Solution {
 
     }
 
+    public int searchInsert(int[] nums, int target) {
+        int length = nums.length;
+        if (length == 0) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = length - 1;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                left = mid;
+            }else if (nums[mid] > target) {
+                right = mid;
+            }else {
+                left = mid;
+            }
+        }
+        if ( nums[left] >= target ){
+            return left;
+        }
+        if ( nums[right] >= target ){
+            return right;
+        }
+        return length;
+    }
+
+//    public ListNode rotateRight(ListNode head, int k) {
+//
+//    }
+
     public static void main(String[] args) {
         Solution sol = new Solution();
         int[] nums = {4, 5, 6, 7, 0, 1, 2};

@@ -6,14 +6,23 @@ import java.util.List;
 public class Solution {
 
     public int[] searchRange(int[] nums, int target) {
-        int[] res = new int[2];
+        int[] res= new int[2];
         int length = nums.length;
         if (length == 0) {
-            res[0] = res[1] = -1;
+            res[0] = -1;
+            res[1] = -1;
             return res;
         }
+        int left = findLeft(nums, target);
+        int right = findRight(nums, target);
+        res[0] = left;
+        res[1] = right;
+        return res;
+    }
+
+    public int findLeft(int[] nums, int target) {
         int left = 0;
-        int right = length - 1;
+        int right = nums.length - 1;
         while (left + 1 < right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] == target) {
@@ -24,20 +33,34 @@ public class Solution {
                 right = mid;
             }
         }
-        List<Integer> result = new ArrayList<>();
-        for (int i = left; i < length; i++) {
-            if ( nums[i] == target ) {
-                result.add(i);
-            }
+        if (nums[left] == target) {
+            return left;
         }
-        if ( result.size() == 0 ) {
-            res[0] = res[1] = -1;
-        }else {
-            res[0] = result.get(0);
-            res[1] = result.get(result.size()-1);
+        if (nums[right] == target) {
+            return right;
         }
-
-        return res;
+        return -1;
     }
 
+    public int findRight(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+        while (left + 1 < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                left = mid;
+            }else if (nums[mid] < target) {
+                left = mid;
+            }else {
+                right = mid;
+            }
+        }
+        if (nums[right] == target) {
+            return right;
+        }
+        if (nums[left] == target) {
+            return left;
+        }
+        return -1;
+    }
 }

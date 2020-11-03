@@ -21,13 +21,11 @@ public class Solution {
         if (root == null) {
             return 0;
         }
-
-        int left = dfs(root.left);
-        int right = dfs(root.right);
-
-        int maxSum = root.val + Math.max(0, left) + Math.max(0, right);
-        max = Math.max(max, maxSum);
-        return root.val + Math.max(Math.max(left, right), 0);
+        int val = root.val;
+        int leftMax = Math.max(0, dfs(root.left));
+        int rightMax = Math.max(0, dfs(root.right));
+        max = Math.max(max,  leftMax + rightMax + val);
+        return val + Math.max(leftMax, rightMax);
     }
 
 

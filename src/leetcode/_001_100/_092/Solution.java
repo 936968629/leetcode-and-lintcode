@@ -6,39 +6,34 @@ import sun.security.krb5.internal.tools.Klist;
 public class Solution {
 
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        if (head == null || head.next == null) {
-            return head;
-        }
-        if (m == n) {
-            return head;
+        if (head == null) {
+            return null;
         }
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
-        ListNode prev = dummy;
+        int count = 1;
         ListNode cur = head;
+        ListNode prev = dummy;
 
-        ListNode mNode = null;
-        ListNode mNodePrev = null;
-        ListNode nNode = null;
-        ListNode next = null;
-        for (int i = 1; i <= n; i++) {
-            if (m == i) {
-                mNodePrev = prev;
-                mNode = cur;
-                prev.next = null;
+        ListNode start = null;
+        ListNode end = null;
+        while (cur != null) {
+            if (count == m) {
+                start = prev;
             }
-            if (n == i) {
-                nNode = cur;
-                next = cur.next;
-                cur.next = null;
+            if(count == n) {
+                end = cur;
             }
             prev = cur;
             cur = cur.next;
+            count++;
         }
-
-        ListNode reverse = reverse(mNode);
-        mNodePrev.next = reverse;
-        mNode.next = next;
+        ListNode next = end.next;
+        end.next = null;
+        ListNode startNode = start.next;
+        ListNode reverse = reverse(start.next);
+        start.next = reverse;
+        startNode.next = next;
         return dummy.next;
     }
 

@@ -1,5 +1,13 @@
 package leetcode._001_100._063;
 
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Solution {
 
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
@@ -37,7 +45,21 @@ public class Solution {
                 }
             }
         }
+
         return dp[rows-1][cols-1];
     }
 
+
+
+    public static void main(String[] args) throws InterruptedException {
+        Solution solution = new Solution();
+//        System.out.println(solution.get());
+//        solution.start();
+//        System.out.println(solution.get());
+//        Thread.sleep(1000);
+//        System.out.println(solution.get());
+//        while (true) {
+//            System.out.println(solution.cur.get());
+//        }
+    }
 }

@@ -20,4 +20,19 @@ public class Solution {
         return (int) a == a ? (int) a : 0;
     }
 
+    public int reverse2(int x) {
+        int res = 0;
+        while (x != 0) {
+            int tmp = x % 10;
+            int newRes = res * 10 + tmp;
+            //判断溢出
+            if (res != (newRes - tmp) / 10) {
+                return 0;
+            }
+            res = newRes;
+            x = x / 10;
+        }
+        return res;
+    }
+
 }

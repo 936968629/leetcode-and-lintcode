@@ -32,22 +32,19 @@ public class Solution {
         return head;
     }
 
-    public Node inorder(Node root) {
+    public void inorder(Node root) {
         if (root == null) {
-            return null;
+            return;
         }
         inorder(root.left);
         if (prev == null) {
             head = root;
-            root.left = prev;
-            prev = root;
-        }else{
+        }else {
             prev.right = root;
-            root.left = prev;
-            prev = root;
         }
+        root.left = prev;
+        prev = root;
         inorder(root.right);
-        return root;
     }
 
     public static void main(String[] args) {

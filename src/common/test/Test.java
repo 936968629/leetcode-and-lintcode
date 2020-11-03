@@ -8,6 +8,7 @@ import lintcode.TreeNode;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 
 public class Test {
@@ -123,46 +124,25 @@ public class Test {
         }
     }
 
-    public int maxProfit(int[] prices) {
-
-        return 1;
+    public int getLength(ListNode head) {
+        ListNode cur = head;
+        int length = 0;
+        while (cur != null) {
+            cur = cur.next;
+            length ++;
+        }
+        return length;
     }
 
-    public int[][] insert(int[][] intervals, int[] newInterval) {
-        List<int[]> result = new ArrayList<>();
-        int rows = intervals.length;
-        if (rows == 0) {
-            int[][] res = new int[1][2];
-            res[0] = newInterval;
-            return res;
-        }
-        int add = 0;
-        for (int i = 0; i < rows; i++) {
-            int[] item = intervals[i];
-            if (item[1] < newInterval[0]) {
-                result.add(item);
-            }else if (item[0] > newInterval[1]){
-                if (add == 0) {
-                    add = 1;
-                    result.add(newInterval);
-                }
-                result.add(item);
-            }else {
-                newInterval[0] = Math.min(item[0], newInterval[0]);
-                newInterval[1] = Math.max(item[1], newInterval[1]);
-            }
-        }
-        if (add == 0) {
-            result.add(newInterval);
-        }
-        return result.toArray(new int[0][]);
-    }
+
+//    public String minWindow(String s, String t) {
+//
+//    }
 
     public static void main(String[] args) {
         CountDownLatch count = new CountDownLatch(4);
         Test test = new Test();
         int[] nusm = {1,1,3};
-
         System.out.println(Arrays.toString(nusm));
 
         List<Integer> nums = new ArrayList<>();

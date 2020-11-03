@@ -5,10 +5,10 @@ import lintcode.ListNode;
 public class Solution {
 
     public ListNode rotateRight(ListNode head, int k) {
-        if (head == null || head.next == null) {
+        int length = getLength(head);
+        if (length <= 1) {
             return head;
         }
-        int length = getLength(head);
         k = k % length;
         if (k == 0) {
             return head;
@@ -16,22 +16,22 @@ public class Solution {
         ListNode reverse = reverse(head);
         ListNode dummy = new ListNode(-1);
         dummy.next = reverse;
-        ListNode prev = dummy;
         ListNode cur = dummy;
-        ListNode next = null;
-        int i = 0;
-        while (i < k) {
-            prev = cur;
+        int count = 0;
+        while (cur != null) {
             cur = cur.next;
-            next = cur.next;
-            i++;
+            count++;
+            if (count == k) {
+                break;
+            }
         }
+        ListNode newHead = dummy.next;
+        ListNode next = cur.next;
         cur.next = null;
-        ListNode l1Head = dummy.next;
-        ListNode reverse1 = reverse(next);
-        ListNode reverse2 = reverse(dummy.next);
-        dummy.next = reverse2;
-        l1Head.next = reverse1;
+        ListNode reverse1 = reverse(dummy.next);
+        ListNode reverse2 = reverse(next);
+        dummy.next = reverse1;
+        newHead.next = reverse2;
         return dummy.next;
     }
 

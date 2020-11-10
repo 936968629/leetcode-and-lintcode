@@ -57,6 +57,8 @@ public class Solution {
         return prev;
     }
 
+
+
     public static void main(String[] args) {
         // 1->2->3->4->5->NULL, k = 2
         Solution solution = new Solution();

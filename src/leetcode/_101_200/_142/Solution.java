@@ -9,7 +9,7 @@ public class Solution {
             return null;
         }
         ListNode slow = head;
-        ListNode fast = head.next;
+        ListNode fast = head;
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -17,6 +17,7 @@ public class Solution {
                 break;
             }
         }
+        //未闭环
         if (slow != fast) {
             return null;
         }

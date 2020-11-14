@@ -139,6 +139,42 @@ public class Test {
 //
 //    }
 
+    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        Set<String> wordSet = new HashSet<>(wordList);
+        Set<String> visited = new HashSet<>();
+        if (!wordSet.contains(endWord)) {
+            return 0;
+        }
+        int count = 0;
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                String item = queue.poll();
+                char[] chars = item.toCharArray();
+                for (int j = 0; j < chars.length; j++) {
+                    char ch = chars[j];
+                    for (char c = 'a'; c <= 'z'; c++) {
+                        chars[j] = c;
+                        if (chars.toString().equals(endWord)) {
+                            visited.add(chars.toString());
+                            return count;
+                        }
+                        if (!visited.contains(chars.toString()) && wordSet.contains(chars.toString())) {
+                            queue.offer(chars.toString());
+                            visited.add(chars.toString());
+                        }
+                    }
+                    chars[j] = ch;
+                }
+            }
+            count++;
+        }
+
+        return count;
+    }
+
     public static void main(String[] args) {
         CountDownLatch count = new CountDownLatch(4);
         Test test = new Test();
